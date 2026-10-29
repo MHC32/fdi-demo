@@ -1,0 +1,186 @@
+/*
+  FDI, prototype : tokens de la direction visuelle « Deux pièces, un filet ».
+  Compatible avec fdi-site/src/styles/tokens.css (mêmes noms), avec des ajouts marqués [+].
+  Contrastes calculés (python3 -I, méthode 04c-contraste.py) : voir direction.md.
+  Règle d'or : marine = ce qu'on lit et ce qu'on actionne ; turquoise = décor, jamais de texte.
+  Les composants lisent des noms sémantiques, jamais un hex.
+*/
+
+/* Polices variables auto-hébergées (chemin relatif à ce fichier ; à rapprocher de fdi-site/public/fonts/ au passage en code) */
+@font-face {
+  font-family: "Rubik";
+  src: url("../fonts/rubik-latin-wght.woff2") format("woff2");
+  font-weight: 300 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public Sans";
+  src: url("../fonts/public-sans-latin-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  /* --- Les deux pièces du logo (hex purs, la 3D les lit) --- */
+  --logo-navy: #024069;
+  --logo-turq: #15b6c8;
+
+  /* --- Couleurs sémantiques, thème clair --- */
+  --c-bg: #f4f8fa;          /* fond de page */
+  --c-surface: #ffffff;     /* cartes, champs, plan le plus clair */
+  --c-tint: #e6f3f6;        /* plan 1 : bande des chiffres, encarts */
+  --c-tint-2: #d5ebf0;      /* [+] plan 2 : plan posé sur --c-tint (texte autorisé : 13,3 / 5,8) */
+  --c-text: #0b2133;
+  --c-muted: #455a6b;
+  --c-primary: #024069;     /* la pièce marine : liens, boutons, titres forts */
+  --c-primary-hover: #013352;
+  --c-on-primary: #ffffff;
+  --c-accent: #0a6677;      /* le turquoise rendu lisible : texte d'accent, icônes porteuses de sens */
+  --c-turq: #15b6c8;        /* la pièce turquoise : DÉCOR et grands aplats, JAMAIS de texte */
+  --c-turq-soft: #bfe8ee;   /* [+] turquoise éclairci : plans décoratifs larges, jamais d'information */
+  --c-border-strong: #667c8c;
+  --c-border: #d2dee5;      /* filet décoratif */
+  --c-focus: #024069;
+  --c-footer: #03263f;
+  --c-on-dark: #ffffff;
+  --c-on-dark-muted: #a8bdcc;
+  --c-focus-on-dark: #6fd6e3;
+  --c-error: #b42318;
+  --c-error-bg: #fdecea;
+  --c-success: #17663a;
+  --c-success-bg: #e6f4ea;
+  --c-warn: #855400;
+  --c-warn-bg: #fff3d6;
+  --c-info-bg: #e6f3f6;
+  --c-stage: #f4f8fa;
+
+  /* --- Typographie : Rubik porte la personnalité, Public Sans porte la lecture --- */
+  --font-display: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Échelle fluide (320 px -> 1440 px). Les sauts sont volontairement larges : un petit corps et un très grand corps, peu de tailles intermédiaires. */
+  --fs-figure-xl: clamp(5.5rem, 2.5rem + 9vw, 10rem);    /* 88 -> 160 : le grand chiffre de la bande */
+  --fs-figure: clamp(3rem, 2rem + 3.6vw, 5rem);          /* 48 -> 80  : chiffres clés, étiquette de chiffre */
+  --fs-display: clamp(2.5rem, 1.5rem + 4.4vw, 5rem);     /* 40 -> 80  : titre du hero */
+  --fs-h1: clamp(2.125rem, 1.6rem + 2.2vw, 3.5rem);      /* 34 -> 56  */
+  --fs-h2: clamp(1.75rem, 1.45rem + 1.3vw, 2.5rem);      /* 28 -> 40  */
+  --fs-h3: clamp(1.375rem, 1.22rem + 0.65vw, 1.75rem);   /* 22 -> 28  */
+  --fs-h4: clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem);   /* 18 -> 20  */
+  --fs-lead: clamp(1.125rem, 1.04rem + 0.45vw, 1.375rem);/* 18 -> 22  : chapeau */
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);     /* 16 -> 18  */
+  --fs-small: 0.875rem;                                  /* 14 : minimum du site */
+
+  /* Graisses : l'écart entre titre (700) et corps (400) fait le contraste */
+  --fw-figure: 700;
+  --fw-display: 700;
+  --fw-heading: 600;
+  --fw-body: 400;
+  --fw-label: 600;
+
+  /* Interlignage : serré sur les gros corps, ouvert sur le texte */
+  --lh-figure: 0.92;
+  --lh-display: 1.02;
+  --lh-h1: 1.06;
+  --lh-h2: 1.12;
+  --lh-h3: 1.2;
+  --lh-h4: 1.35;
+  --lh-lead: 1.5;
+  --lh-body: 1.6;
+  --lh-small: 1.5;
+
+  /* Approche : on resserre les gros titres, on n'y touche pas dans le texte */
+  --ls-figure: -0.035em;
+  --ls-display: -0.03em;
+  --ls-heading: -0.015em;
+  --measure: 66ch;          /* longueur de ligne maximale du texte */
+
+  /* --- Espacement (base 4 px) --- */
+  --sp-1: 0.25rem;   /* 4 */
+  --sp-2: 0.5rem;    /* 8   : dans un élément */
+  --sp-3: 0.75rem;   /* 12 */
+  --sp-4: 1rem;      /* 16 */
+  --sp-5: 1.5rem;    /* 24  : entre éléments d'un groupe */
+  --sp-6: 2rem;      /* 32 */
+  --sp-7: 3rem;      /* 48  : entre groupes */
+  --sp-8: 4rem;      /* 64 */
+  --sp-9: 6rem;      /* 96  : entre sections */
+  --sp-10: 8rem;     /* 128 : avant un moment fort */
+  --gutter: clamp(1rem, 0.5rem + 2vw, 3rem);
+  --content-max: 75rem;
+  --section-y: clamp(4rem, 3rem + 3vw, 6rem);
+  --section-y-strong: clamp(5rem, 3rem + 6vw, 8rem);
+
+  /* --- Rayons : un rayon par rôle, pas un rayon pour tout --- */
+  --r-sm: 6px;       /* champs, boutons */
+  --r-md: 12px;      /* cartes, alertes */
+  --r-lg: 20px;      /* panneaux, carte principale, modales */
+  --r-full: 999px;   /* étiquettes de statut seulement */
+  /* Les plans (sections, bandes) n'ont aucun rayon : ils sont coupés à 30° */
+
+  /* --- Ombres teintées marine : de la lumière, pas du gris --- */
+  --e1: 0 1px 2px rgba(2, 64, 105, 0.08);
+  --e2: 0 4px 12px rgba(2, 64, 105, 0.12);
+  --e3: 0 12px 32px rgba(2, 64, 105, 0.16);
+  --e-plane: 0 2px 4px rgba(2, 64, 105, 0.06), 0 28px 56px -16px rgba(2, 64, 105, 0.28); /* [+] plan clair posé sur un autre */
+  --e-focus: 0 0 0 3px var(--c-surface), 0 0 0 6px var(--c-focus);
+
+  /* --- Mouvement (alias de 04b) --- */
+  --dur-xs: 150ms;
+  --dur-s: 250ms;
+  --dur-m: 450ms;
+  --dur-l: 700ms;
+  --dur-xl: 1200ms;
+  --ease-glide: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-lock: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-leave: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+
+  /* --- La diagonale : un seul angle, 30° sous l'horizontale (arête de l'hexagone) --- */
+  --angle: 30deg;
+  --cot: 1.7320508;        /* [+] 1 / tan(30°) : course horizontale = hauteur x --cot */
+  --filet: 6px;            /* [+] espace constant entre deux pièces, ~4 % de la largeur du pictogramme */
+  --cut-s: 48px;           /* [+] hauteur de la marche, petite coupe (course ~83 px) */
+  --cut-m: 96px;           /* [+] hauteur de la marche, coupe de section (course ~166 px) */
+
+  /* --- Cibles et focus --- */
+  --target: 44px;
+  --field-h: 48px;
+  --focus-width: 3px;
+  --focus-offset: 2px;
+}
+
+/* Thème sombre : proposition reprise de 04-UI-UX §2.2, non montrée dans la planche (décision client en attente). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --c-bg: #06202f;
+  --c-surface: #0c3048;
+  --c-tint: #0c3048;
+  --c-tint-2: #12405d;
+  --c-text: #eaf2f7;
+  --c-muted: #a8bdcc;
+  --c-primary: #15b6c8;
+  --c-primary-hover: #33c4d4;
+  --c-on-primary: #06202f;
+  --c-accent: #6fd6e3;
+  --c-border-strong: #6f8da0;
+  --c-border: #1d4560;
+  --c-focus: #6fd6e3;
+  --c-error: #ff9a8f;
+  --c-error-bg: #3a1c1c;
+  --c-success: #7fd8a0;
+  --c-success-bg: #12301f;
+  --c-warn: #f5c26b;
+  --c-warn-bg: #3a2c0c;
+  --c-info-bg: #0c3048;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-xs: 0.01ms;
+    --dur-s: 0.01ms;
+    --dur-m: 0.01ms;
+    --dur-l: 0.01ms;
+    --dur-xl: 0.01ms;
+  }
+}

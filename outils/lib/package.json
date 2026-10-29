@@ -1,0 +1,9 @@
+{
+  "name": "fdi-outils-lib",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "build": "node build-bundle.mjs"
+  }
+}
